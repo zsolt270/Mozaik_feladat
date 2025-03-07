@@ -9,3 +9,12 @@
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
 }
+
+a:hover,
+svg:hover {
+    cursor: pointer;
+}
+
+.font-monospace {
+    letter-spacing: 0.2em;
+}
