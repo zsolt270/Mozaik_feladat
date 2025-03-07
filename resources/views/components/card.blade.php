@@ -1,17 +1,20 @@
+@props(['name' => 'Chess Tournament', 'game' => 'Chess', 'date' => '2025.03.22 13:00','country' => 'Hungary', 'address'
+=> 'Példa u 22'])
+
 <div class="card" style="width: 18rem;">
     <div class="card-header px-2">
-        <h5 class="mb-1">Tournament Name</h5>
+        <h5 class="mb-1">{{$name}}</h5>
     </div>
     <div class="card-body px-2 py-1">
         <ul class="list-group list-group-flush">
             <li class="list-group-item px-0">
-                <h6 class="card-subtitle text-body-secondary">game</h6>
+                <h6 class="card-subtitle text-body-secondary">{{$game}}</h6>
             </li>
             <li class="list-group-item px-0">
-                <h6 class="card-subtitle text-body-secondary">Date</h6>
+                <h6 class="card-subtitle text-body-secondary">{{$date}}</h6>
             </li>
             <li class="list-group-item px-0">
-                <h6 class="card-subtitle text-body-secondary">Address</h6>
+                <h6 class="card-subtitle text-body-secondary">{{$country}} | {{$address}}</h6>
             </li>
         </ul>
         <div class="d-flex justify-content-between mt-4">
