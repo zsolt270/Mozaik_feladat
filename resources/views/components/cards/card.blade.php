@@ -19,8 +19,8 @@
         </ul>
         <div class="d-flex justify-content-between mt-4">
             <div>
-                <button class="btn btn-outline-secondary">Edit</button>
-                <button class="btn btn-outline-danger">Delete</button>
+                <x-buttons.outlinedBtn variant="secondary">Edit</x-buttons.outlinedBtn>
+                <x-buttons.outlinedBtn variant="danger">Delete</x-buttons.outlinedBtn>
             </div>
             <div>
                 <a href="#" class="btn btn-outline-dark">

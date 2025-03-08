@@ -28,6 +28,46 @@ Route::get('/', function () {
             'address' => 'online',
             'description' => 'jposjaopdjkaspojkdpoakpdoksapdkopsakdosa'
         ],
+        [
+            'name' => 'Valami3',
+            'game' => 'CS2',
+            'date' => '2025.06.12 17:00',
+            'country' => 'Belgium',
+            'address' => 'online',
+            'description' => 'jposjaopdjkaspojkdpoakpdoksapdkopsakdosa'
+        ],
+        [
+            'name' => 'Valami3',
+            'game' => 'CS2',
+            'date' => '2025.06.12 17:00',
+            'country' => 'Belgium',
+            'address' => 'online',
+            'description' => 'jposjaopdjkaspojkdpoakpdoksapdkopsakdosa'
+        ],
+        [
+            'name' => 'Valami3',
+            'game' => 'CS2',
+            'date' => '2025.06.12 17:00',
+            'country' => 'Belgium',
+            'address' => 'online',
+            'description' => 'jposjaopdjkaspojkdpoakpdoksapdkopsakdosa'
+        ],
+        [
+            'name' => 'Valami3',
+            'game' => 'CS2',
+            'date' => '2025.06.12 17:00',
+            'country' => 'Belgium',
+            'address' => 'online',
+            'description' => 'jposjaopdjkaspojkdpoakpdoksapdkopsakdosa'
+        ],
+        [
+            'name' => 'Valami3',
+            'game' => 'CS2',
+            'date' => '2025.06.12 17:00',
+            'country' => 'Belgium',
+            'address' => 'online',
+            'description' => 'jposjaopdjkaspojkdpoakpdoksapdkopsakdosa'
+        ],
     ];
     return view('home', ['tournaments' => $tournaments]);
 });
