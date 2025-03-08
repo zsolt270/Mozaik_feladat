@@ -1,7 +1,7 @@
 @props(['name' => 'Chess Tournament', 'game' => 'Chess', 'date' => '2025.03.22 13:00','country' => 'Hungary', 'address'
 => 'Példa u 22'])
 
-<div class="card" style="width: 18rem;">
+<article class="card" style="width: 18rem;">
     <div class="card-header px-2">
         <h5 class="mb-1">{{$name}}</h5>
     </div>
@@ -33,4 +33,4 @@
             </div>
         </div>
     </div>
-</div>
+</article>
