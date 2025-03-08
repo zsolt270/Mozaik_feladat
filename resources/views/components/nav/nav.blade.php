@@ -2,7 +2,7 @@
     <div class="container-fluid align-items-center">
         <div class="d-flex align-items-center gap-4">
             <x-nav.logo />
-            <x-nav.nav-link href="#">TOURNAMENTS</x-nav.nav-link>
+            <x-nav.nav-link href="/">TOURNAMENTS</x-nav.nav-link>
         </div>
         <div>
             <x-nav.nav-link href="#" class="me-3">

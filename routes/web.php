@@ -71,3 +71,7 @@ Route::get('/', function () {
     ];
     return view('home', ['tournaments' => $tournaments]);
 });
+
+Route::get('/round', function () {
+    return view('round');
+});
