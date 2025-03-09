@@ -25,14 +25,14 @@
 
     {{-- create round modal --}}
     <x-modals.modalLayout id="createRoundModal" modalHeader="Create Round">
-        <x-modals.roundModal action="" method="" labelText="Name" placeholder="Semifinals" btnText="Add">
+        <x-modals.roundModal action="" method="" labelText="Name" value="" btnText="Add">
         </x-modals.roundModal>
     </x-modals.modalLayout>
     {{-- create round modal end --}}
 
     {{-- edit round modal --}}
     <x-modals.modalLayout id="editRoundModal" modalHeader="Edit Round">
-        <x-modals.roundModal action="" method="PATCH" labelText="New Name" placeholder="Quarter-final" btnText="Change">
+        <x-modals.roundModal action="" method="PATCH" labelText="New Name" value="Finals" btnText="Change">
         </x-modals.roundModal>
     </x-modals.modalLayout>
     {{-- edit round modal end--}}
