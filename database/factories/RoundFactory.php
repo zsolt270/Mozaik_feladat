@@ -17,7 +17,7 @@ class RoundFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->randomElement(['Round 1', 'Round 2', 'Round 3', 'Round 4', 'Round 5', 'Quarter-finals', 'Semi-finals', 'Finals'])
         ];
     }
 }

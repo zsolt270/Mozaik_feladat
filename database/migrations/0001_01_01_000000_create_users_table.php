@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('country');
             $table->string('phone_number');
+            $table->boolean('admin');
             $table->rememberToken();
             $table->timestamps();
         });
