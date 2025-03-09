@@ -1,1 +1,1 @@
-<a href="#" class="h3 mb-0 text-white text-decoration-none font-monospace">LOGO</a>
+<a href="/" class="h3 mb-0 text-white text-decoration-none font-monospace">LOGO</a>

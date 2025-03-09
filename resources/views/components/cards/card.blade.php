@@ -19,7 +19,9 @@
         </ul>
         <div class="d-flex justify-content-between mt-4">
             <div>
-                <x-buttons.outlinedBtn variant="secondary">Edit</x-buttons.outlinedBtn>
+                <x-buttons.outlinedBtn variant="secondary" data-bs-toggle="modal" data-bs-target="#editTournamentModal">
+                    Edit
+                </x-buttons.outlinedBtn>
                 <x-buttons.outlinedBtn variant="danger">Delete</x-buttons.outlinedBtn>
             </div>
             <div>
