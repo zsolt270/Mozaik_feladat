@@ -38,7 +38,7 @@
     {{-- edit round modal end--}}
 
     {{-- add participants modal --}}
-    <x-modals.modalLayout id="addParticipantModal" modalHeader="Add Participant" data-bs-backdrop="static">
+    <x-modals.modalLayout id="addParticipantModal" modalHeader="Add Competitors" data-bs-backdrop="static">
         <x-modals.addParticipant :users="$users" />
     </x-modals.modalLayout>
     {{-- add participants modal end --}}

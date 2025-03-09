@@ -16,7 +16,7 @@
         data-bs-parent="#roundsAccordion">
         <div class="accordion-body">
             <div class="d-flex gap-4 align-items-center border-bottom border-secondary pb-2">
-                <h6 class="mb-0">Participants</h6>
+                <h6 class="mb-0">Competitors</h6>
                 <x-buttons.outlinedBtn class="px-2 py-0" variant="primary" data-bs-toggle="modal"
                     data-bs-target="#addParticipantModal">Add</x-buttons.outlinedBtn>
             </div>
