@@ -9,4 +9,9 @@ class Tournament extends Model
 {
     /** @use HasFactory<\Database\Factories\TournamentFactory> */
     use HasFactory;
+
+    public function rounds()
+    {
+        return $this->hasMany(Round::class);
+    }
 }

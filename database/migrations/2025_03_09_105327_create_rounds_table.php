@@ -17,14 +17,14 @@ return new class extends Migration
         Schema::create('rounds', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignIdFor(Tournament::class);
+            $table->foreignIdFor(Tournament::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
 
         Schema::create('competitors', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Round::class);
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Round::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

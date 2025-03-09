@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function rounds()
+    {
+        return $this->belongsToMany(Round::class, 'competitors');
+    }
 }

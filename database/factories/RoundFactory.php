@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Tournament;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class RoundFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->randomElement(['Round 1', 'Round 2', 'Round 3', 'Round 4', 'Round 5', 'Quarter-finals', 'Semi-finals', 'Finals'])
+            'name' => fake()->randomElement(['Round 1', 'Round 2', 'Round 3', 'Round 4', 'Round 5', 'Quarter-finals', 'Semi-finals', 'Finals']),
+            'tournament_id' => Tournament::factory()
         ];
     }
 }
