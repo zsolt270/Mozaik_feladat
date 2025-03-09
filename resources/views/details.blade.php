@@ -39,7 +39,7 @@
 
     {{-- add participants modal --}}
     <x-modals.modalLayout id="addParticipantModal" modalHeader="Add Competitors" data-bs-backdrop="static">
-        <x-modals.addParticipant :users="$users" />
+        <x-modals.addCompetitors :users="$users" />
     </x-modals.modalLayout>
     {{-- add participants modal end --}}
 

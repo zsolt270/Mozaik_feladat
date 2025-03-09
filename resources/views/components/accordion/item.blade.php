@@ -21,9 +21,9 @@
                     data-bs-target="#addParticipantModal">Add</x-buttons.outlinedBtn>
             </div>
             <div class="d-flex column-gap-5 row-gap-2 flex-wrap justify-content-between  justify-content-sm-start">
-                <x-accordion.participant></x-accordion.participant>
-                <x-accordion.participant></x-accordion.participant>
-                <x-accordion.participant></x-accordion.participant>
+                <x-accordion.competitors></x-accordion.competitors>
+                <x-accordion.competitors></x-accordion.competitors>
+                <x-accordion.competitors></x-accordion.competitors>
             </div>
         </div>
     </div>
