@@ -10,6 +10,8 @@ class Round extends Model
     /** @use HasFactory<\Database\Factories\RoundFactory> */
     use HasFactory;
 
+    protected $fillable = [];
+
     public function tournament()
     {
         return $this->belongsTo(Tournament::class);
