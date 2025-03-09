@@ -7,28 +7,28 @@
     <div class="col-md-12">
         <label for="name" class="form-label fw-bold">Name</label>
         <input type="text" class="form-control" id="name" name="name" placeholder="Chess Tournament"
-            value="{{$method === 'PATCH' ? $values['name'] : ""}}">
+            value="{{$method === 'PATCH' ? $values['name'] : ""}}" required>
     </div>
     <div class="col-md-12">
         <label for="game" class="form-label fw-bold">Game</label>
         <input type="text" class="form-control" id="game" name="game" placeholder="Chess"
-            value="{{$method === 'PATCH' ? $values['game'] : ""}}">
+            value="{{$method === 'PATCH' ? $values['game'] : ""}}" required>
     </div>
     <div class="col-md-12">
         <label for="date" class="form-label fw-bold">Date</label>
         <input type="datetime-local" class="form-control" id="date" name="date"
-            value="{{$method === 'PATCH' ? $values['date'] : ""}}">
+            value="{{$method === 'PATCH' ? $values['date'] : ""}}" required>
     </div>
     <div class="col-6">
         <label for="country" class="form-label fw-bold">Country</label>
         <input list="countries" class="form-control" id="country" name="country" placeholder="Hungary"
-            value="{{$method === 'PATCH' ? $values['country'] : ""}}">
+            value="{{$method === 'PATCH' ? $values['country'] : ""}}" required>
         <x-form.datalist id="countries" />
     </div>
     <div class="col-6">
         <label for="address" class="form-label fw-bold">Address</label>
         <input type="text" class="form-control" id="address" name="address" placeholder="Szekszárd Mátyás király u. 12"
-            value="{{$method === 'PATCH' ? $values['address'] : ""}}">
+            value="{{$method === 'PATCH' ? $values['address'] : ""}}" required>
     </div>
     <div class="col-md-12">
         <label for="description" class="form-label fw-bold">Description</label>
