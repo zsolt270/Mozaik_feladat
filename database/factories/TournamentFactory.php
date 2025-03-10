@@ -22,7 +22,7 @@ class TournamentFactory extends Factory
             'date' => fake()->dateTime(),
             'country' => fake()->country(),
             'address' => fake()->address(),
-            'description' => fake()->sentences()
+            'description' => fake()->sentence()
         ];
     }
 }

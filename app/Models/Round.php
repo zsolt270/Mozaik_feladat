@@ -10,7 +10,7 @@ class Round extends Model
     /** @use HasFactory<\Database\Factories\RoundFactory> */
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = ['name'];
 
     public function tournament()
     {
