@@ -21,14 +21,7 @@ class TournamentController extends Controller
 
     public function store()
     {
-        request()->validate([
-            'name' => ['required', 'string'],
-            'game' => ['required'],
-            'date' => ['required', 'date'],
-            'country' => ['required'],
-            'address' => ['required'],
-            'description' => ['required'],
-        ]);
+        $this->validateTournament();
 
         try {
             Tournament::create([
@@ -43,9 +36,7 @@ class TournamentController extends Controller
             return response()->json(['error' => 'This name at this date is unavailable'], 500);
         }
 
-        $tournaments = Tournament::paginate(8);
-        $html = view('components.cards.list', ['tournaments' => $tournaments])->render();
-        return response()->json(["html" => $html]);
+        return $this->returnUpdatedCardsList();
     }
 
     public function edit(Tournament $tournament)
@@ -55,14 +46,7 @@ class TournamentController extends Controller
 
     public function update(Tournament $tournament)
     {
-        request()->validate([
-            'name' => ['required', 'string'],
-            'game' => ['required'],
-            'date' => ['required', 'date'],
-            'country' => ['required'],
-            'address' => ['required'],
-            'description' => ['required'],
-        ]);
+        $this->validateTournament();
 
         try {
             $tournament->update([
@@ -77,9 +61,7 @@ class TournamentController extends Controller
             return response()->json(['error' => 'This name at this date is unavailable'], 500);
         }
 
-        $tournaments = Tournament::paginate(8);
-        $html = view('components.cards.list', ['tournaments' => $tournaments])->render();
-        return response()->json(["html" => $html]);
+        return $this->returnUpdatedCardsList();
     }
 
     public function destroy(Tournament $tournament)
@@ -87,6 +69,23 @@ class TournamentController extends Controller
 
         $tournament->delete();
 
+        return $this->returnUpdatedCardsList();
+    }
+
+    private function validateTournament()
+    {
+        request()->validate([
+            'name' => ['required', 'string'],
+            'game' => ['required'],
+            'date' => ['required', 'date'],
+            'country' => ['required'],
+            'address' => ['required'],
+            'description' => ['required'],
+        ]);
+    }
+
+    private function returnUpdatedCardsList()
+    {
         $tournaments = Tournament::paginate(8);
         $html = view('components.cards.list', ['tournaments' => $tournaments])->render();
         return response()->json(["html" => $html]);
