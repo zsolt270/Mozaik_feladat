@@ -25,7 +25,7 @@
     </div>
     @endforeach
 
-    {{-- <div>
-        {{$tournaments->links()}}
-    </div> --}}
+</div>
+<div>
+    {{$users->links()}}
 </div>
