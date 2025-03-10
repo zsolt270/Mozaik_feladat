@@ -21,13 +21,13 @@ $tournament = ['name' => 'Valami',
 
     {{-- create tournament modal --}}
     <x-modals.modalLayout id="createTournamentModal" modalHeader="Create Tournament">
-        <x-modals.tournamentModal action="" method="" btnText="Add" />
+        <x-modals.tournamentModal id="createTournament" method="" btnText="Add" />
     </x-modals.modalLayout>
     {{-- create tournament modal end--}}
 
     {{-- edit tournament modal --}}
     <x-modals.modalLayout id="editTournamentModal" modalHeader="Edit Tournament">
-        <x-modals.tournamentModal action="" method="PATCH" :values="$tournament" btnText="Change" />
+        <x-modals.tournamentModal id="editTournament" method="PATCH" :values="$tournament" btnText="Change" />
     </x-modals.modalLayout>
     {{-- edit tournament modal end--}}
 
