@@ -1,7 +1,7 @@
 @props(['name' => 'Chess Tournament', 'game' => 'Chess', 'date' => '2025.03.22 13:00','country' => 'Hungary', 'address'
-=> 'Példa u 22'])
+=> 'Példa u 22', 'tournamentId'])
 
-<article class="card" style="width: 18rem;">
+<article class="card" style="width: 18rem;" id={{$tournamentId}}>
     <div class="card-header px-2">
         <h5 class="mb-1">{{$name}}</h5>
     </div>
@@ -19,10 +19,12 @@
         </ul>
         <div class="d-flex justify-content-between mt-4">
             <div>
-                <x-buttons.outlinedBtn variant="secondary" data-bs-toggle="modal" data-bs-target="#editTournamentModal">
+                <x-buttons.outlinedBtn class="editTournamentBtn" variant="secondary" data-bs-toggle="modal"
+                    data-bs-target="#editTournamentModal">
                     Edit
                 </x-buttons.outlinedBtn>
-                <x-buttons.outlinedBtn variant="danger">Delete</x-buttons.outlinedBtn>
+                <x-buttons.outlinedBtn class="deleteTournamentBtn" variant="danger">
+                    Delete</x-buttons.outlinedBtn>
             </div>
             <div>
                 <a href="/round" class="btn btn-outline-dark">

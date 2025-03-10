@@ -47,4 +47,48 @@ class TournamentController extends Controller
         $html = view('components.cards.list', ['tournaments' => $tournaments])->render();
         return response()->json(["html" => $html]);
     }
+
+    public function edit(Tournament $tournament)
+    {
+        return response()->json($tournament);
+    }
+
+    public function update(Tournament $tournament)
+    {
+        request()->validate([
+            'name' => ['required', 'string'],
+            'game' => ['required'],
+            'date' => ['required', 'date'],
+            'country' => ['required'],
+            'address' => ['required'],
+            'description' => ['required'],
+        ]);
+
+        try {
+            $tournament->update([
+                'name' => request('name'),
+                'game' => request('game'),
+                'date' => request('date'),
+                'country' => request('country'),
+                'address' => request('address'),
+                'description' => request('description'),
+            ]);
+        } catch (Exception $errors) {
+            return response()->json(['error' => 'This name at this date is unavailable'], 500);
+        }
+
+        $tournaments = Tournament::paginate(8);
+        $html = view('components.cards.list', ['tournaments' => $tournaments])->render();
+        return response()->json(["html" => $html]);
+    }
+
+    public function destroy(Tournament $tournament)
+    {
+
+        $tournament->delete();
+
+        $tournaments = Tournament::paginate(8);
+        $html = view('components.cards.list', ['tournaments' => $tournaments])->render();
+        return response()->json(["html" => $html]);
+    }
 }

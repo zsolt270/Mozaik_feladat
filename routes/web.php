@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [TournamentController::class, 'index']);
 Route::post('/', [TournamentController::class, 'store']);
+Route::get('/{tournament}/edit', [TournamentController::class, 'edit']);
+Route::patch('/{tournament}', [TournamentController::class, 'update']);
+Route::delete('/{tournament}', [TournamentController::class, 'destroy']);
 
 Route::get('/proba', function () {
     return 'proba';
