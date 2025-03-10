@@ -14,38 +14,51 @@ $(() => {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
     });
+
+    function handleErrors(error, formType) {
+        const errorMsg = error.responseJSON.errors || error.responseJSON.error;
+        $(".text-danger").text("");
+
+        if (error.status === 422) {
+            $(".text-danger").text("");
+
+            $.each(errorMsg, function (key, value) {
+                $("#" + formType + "Error-" + key).text(value);
+            });
+        } else if (error.status === 500) {
+            $("#" + formType + "Error-name").text(errorMsg);
+            $("#" + formType + "Error-date").text(errorMsg);
+        }
+    }
+
+    function sendRequest(url, method, data, successCallback, errorCallback) {
+        $.ajax({
+            url: url,
+            data: data,
+            type: method,
+            dataType: "json",
+            success: successCallback,
+            error: errorCallback,
+        });
+    }
+
     //create tournament
     $("#createTournament").on("submit", function (e) {
         e.preventDefault();
-
-        $.ajax({
-            url: "/",
-            data: $("#createTournament").serialize(),
-            type: "post",
-            dataType: "json",
-
-            success: function (result) {
+        sendRequest(
+            "/",
+            "post",
+            $(this).serialize(),
+            function (result) {
                 $("#cardsContainer").html(result.html);
                 $("#createTournament")[0].reset();
                 createTournamentModal.hide();
             },
-            error: function (error) {
+            function (error) {
                 console.log("Error:", error);
-                let errorMsg =
-                    error.responseJSON.errors || error.responseJSON.error;
-
-                if (error.status === 422) {
-                    $(".text-danger").text("");
-
-                    $.each(errorMsg, function (key, value) {
-                        $("#createError-" + key).text(value);
-                    });
-                } else if (error.status === 500) {
-                    $("#createError-name").text(errorMsg);
-                    $("#createError-date").text(errorMsg);
-                }
-            },
-        });
+                handleErrors(error, "create");
+            }
+        );
     });
 
     //get values from db and add it to inputs
@@ -54,13 +67,13 @@ $(() => {
             .find($(e.target))
             .parents(".card")
             .attr("id");
-        if ($(e.target).is("button.editTournamentBtn")) {
-            $.ajax({
-                url: `/${tournamentId}/edit`,
-                type: "get",
-                dataType: "json",
 
-                success: function (result) {
+        if ($(e.target).is("button.editTournamentBtn")) {
+            sendRequest(
+                `/${tournamentId}/edit`,
+                "get",
+                {},
+                function (result) {
                     $.each(result, function (key, value) {
                         $("#Update" + key).val(value);
                     });
@@ -69,10 +82,10 @@ $(() => {
                         tournamentId
                     );
                 },
-                error: function (error) {
+                function (error) {
                     console.log("Error:", error);
-                },
-            });
+                }
+            );
         }
     });
 
@@ -81,51 +94,20 @@ $(() => {
         e.preventDefault();
         const tournamentId = $(this).attr("data-tournamentid");
 
-        $.ajax({
-            url: `/${tournamentId}`,
-            data: $("#editTournament").serialize(),
-            type: "PATCH",
-            dataType: "json",
-
-            success: function (result) {
+        sendRequest(
+            `/${tournamentId}`,
+            "PATCH",
+            $(this).serialize(),
+            function (result) {
                 $("#cardsContainer").html(result.html);
-                $(".editTournamentBtn").on("click", function (e) {
-                    const tournamentId = $(this).parents(".card").attr("id");
-                    $.ajax({
-                        url: `/${tournamentId}/edit`,
-                        type: "get",
-                        dataType: "json",
-
-                        success: function (result) {
-                            $.each(result, function (key, value) {
-                                $("#Update" + key).val(value);
-                            });
-                        },
-                        error: function (error) {
-                            console.log("Error:", error);
-                        },
-                    });
-                });
                 $("#createTournament")[0].reset();
                 editTournamentModal.hide();
             },
-            error: function (error) {
+            function (error) {
                 console.log("Error:", error);
-                let errorMsg =
-                    error.responseJSON.errors || error.responseJSON.error;
-
-                if (error.status === 422) {
-                    $(".text-danger").text("");
-
-                    $.each(errorMsg, function (key, value) {
-                        $("#updateError-" + key).text(value);
-                    });
-                } else if (error.status === 500) {
-                    $("#updateError-name").text(errorMsg);
-                    $("#updateError-date").text(errorMsg);
-                }
-            },
-        });
+                handleErrors(error, "update");
+            }
+        );
     });
 
     //delete resource
@@ -134,19 +116,19 @@ $(() => {
             .find($(e.target))
             .parents(".card")
             .attr("id");
-        if ($(e.target).is("button.deleteTournamentBtn")) {
-            $.ajax({
-                url: `/${tournamentId}`,
-                type: "delete",
-                dataType: "json",
 
-                success: function (result) {
+        if ($(e.target).is("button.deleteTournamentBtn")) {
+            sendRequest(
+                `/${tournamentId}`,
+                "delete",
+                {},
+                function (result) {
                     $("#cardsContainer").html(result.html);
                 },
-                error: function (error) {
+                function (error) {
                     console.log("Error:", error);
-                },
-            });
+                }
+            );
         }
     });
 });
