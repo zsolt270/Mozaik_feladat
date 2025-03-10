@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tournament;
+use App\Models\User;
 use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
-
-use function Pest\Laravel\json;
+use Illuminate\Support\Facades\Auth;
 
 class TournamentController extends Controller
 {
 
     public function index()
     {
+        // to try access denying for normal users 
+        // $user = User::where('id', 2)->first();
+        // Auth::login($user);
+
+        $admin = User::where('admin', true)->first();
+        Auth::login($admin);
+
         $tournaments = Tournament::paginate(8);
 
         return view('home', ['tournaments' => $tournaments]);
@@ -66,7 +71,6 @@ class TournamentController extends Controller
 
     public function destroy(Tournament $tournament)
     {
-
         $tournament->delete();
 
         return $this->returnUpdatedCardsList();

@@ -1,18 +1,13 @@
 <?php
 
 use App\Http\Controllers\TournamentController;
-use App\Models\Tournament;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [TournamentController::class, 'index']);
-Route::post('/', [TournamentController::class, 'store']);
-Route::get('/{tournament}/edit', [TournamentController::class, 'edit']);
-Route::patch('/{tournament}', [TournamentController::class, 'update']);
-Route::delete('/{tournament}', [TournamentController::class, 'destroy']);
-
-Route::get('/proba', function () {
-    return 'proba';
-});
+Route::post('/', [TournamentController::class, 'store'])->middleware(['can:isAdmin']);
+Route::get('/{tournament}/edit', [TournamentController::class, 'edit'])->middleware(['can:isAdmin']);
+Route::patch('/{tournament}', [TournamentController::class, 'update'])->middleware(['can:isAdmin']);
+Route::delete('/{tournament}', [TournamentController::class, 'destroy'])->middleware(['can:isAdmin']);
 
 Route::get('/round', function () {
     $users = [

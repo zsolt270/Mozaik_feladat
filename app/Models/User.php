@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Round::class, 'competitors');
     }
+
+    public function isAdmin()
+    {
+        return $this->admin;
+    }
 }
