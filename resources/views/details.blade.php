@@ -18,7 +18,9 @@
     </section>
 
     {{-- accordion --}}
-    <x-accordion.accordionLayout :tournament="$tournament" />
+    <div id="accordionCointainer">
+        <x-accordion.accordionLayout :tournament="$tournament" />
+    </div>
     {{-- accordion end--}}
 
     {{-- create round modal --}}

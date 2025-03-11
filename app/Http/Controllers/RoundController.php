@@ -35,7 +35,23 @@ class RoundController extends Controller
         return response()->json(["html" => $html]);
     }
 
-    public function update(Tournament $tournament) {}
+    public function update(Tournament $tournament, Round $round)
+    {
+        request()->validate([
+            'name' => ['required']
+        ]);
+
+        try {
+            $round->update([
+                'name' => request('name'),
+            ]);
+        } catch (Exception $errors) {
+            return response()->json(['error' => $errors->getMessage()], 500);
+        }
+
+        $html = view('components.accordion.accordionLayout', ['tournament' => $tournament])->render();
+        return response()->json(["html" => $html]);
+    }
 
     public function destroy(Tournament $tournament) {}
 }
