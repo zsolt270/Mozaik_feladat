@@ -16,4 +16,5 @@ Route::post('/{tournament}/create-round', [RoundController::class, 'store'])->mi
 Route::patch('/{tournament}/{round}', [RoundController::class, 'update'])->middleware(['auth', 'can:isAdmin']);
 Route::delete('/{tournament}/{round}', [RoundController::class, 'destroy'])->middleware(['auth', 'can:isAdmin']);
 
+Route::get('/{tournament}/{round}/competitors', [RoundController::class, 'getUsersList']);
 Route::post('/{tournament}/{round}/create-competitor', [RoundController::class, 'storeCompetitor'])->middleware(['auth', 'can:isAdmin']);

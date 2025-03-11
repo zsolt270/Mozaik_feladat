@@ -18,32 +18,6 @@ $(() => {
         },
     });
 
-    //effect for adding user to round
-    $("#usersContainer")
-        .parent()
-        .on("click", function (e) {
-            if ($(e.target).hasClass("searched-user")) {
-                e.preventDefault();
-                $(e.target).css("background-color", "#AFE1AF");
-                $(e.target).find("button").text("✓");
-                $(e.target).find("p").css("font-weight", "500");
-
-                $.ajax({
-                    url: `/${tournamentId}/${roundId}/create-competitor`,
-                    data: { userId: $(e.target).attr("id").split("-")[1] },
-                    type: "post",
-                    dataType: "json",
-                    success: function (result) {
-                        $("#roundsAccordion").replaceWith(result.accordion);
-                        $("#usersContainer").replaceWith(result.usersList);
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    },
-                });
-            }
-        });
-
     //create round
     $("#createRound").on("submit", function (e) {
         e.preventDefault();
@@ -66,15 +40,6 @@ $(() => {
                 $("#createError-name").text(error.responseJSON.message);
             },
         });
-    });
-
-    //get the round id when user clicks on accordion
-    $("#accordionCointainer").on("click", function (e) {
-        e.preventDefault();
-        roundId = $(e.target)
-            .parents(".accordion-item")
-            .children(".accordion-collapse")
-            .attr("id");
     });
 
     //update round
@@ -101,8 +66,14 @@ $(() => {
         });
     });
 
-    //delete round
+    //delete round, get userslist, add users as competitors to round
     $("#accordionCointainer").on("click", function (e) {
+        e.preventDefault();
+        roundId = $(e.target)
+            .parents(".accordion-item")
+            .children(".accordion-collapse")
+            .attr("id");
+
         if (
             $(e.target).is("button.btn-outline-danger") &&
             $(e.target).text() === "Delete"
@@ -124,6 +95,47 @@ $(() => {
                     $("#updateError-name").text(error.responseJSON.message);
                 },
             });
+        } else if (
+            $(e.target).is("button[data-bs-target='#addCompetitorsModal']")
+        ) {
+            $.ajax({
+                url: `/${tournamentId}/${roundId}/competitors`,
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    $("#roundsAccordion").replaceWith(result.accordion);
+                    $("#usersContainer").replaceWith(result.usersList);
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+            });
         }
     });
+
+    //effect for adding user to round and adding user to round
+    $("#usersContainer")
+        .parent()
+        .on("click", function (e) {
+            if ($(e.target).hasClass("searched-user")) {
+                e.preventDefault();
+                $(e.target).css("background-color", "#AFE1AF");
+                $(e.target).find("button").text("✓");
+                $(e.target).find("p").css("font-weight", "500");
+
+                $.ajax({
+                    url: `/${tournamentId}/${roundId}/create-competitor`,
+                    data: { userId: $(e.target).attr("id").split("-")[1] },
+                    type: "post",
+                    dataType: "json",
+                    success: function (result) {
+                        $("#roundsAccordion").replaceWith(result.accordion);
+                        $("#usersContainer").replaceWith(result.usersList);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    },
+                });
+            }
+        });
 });

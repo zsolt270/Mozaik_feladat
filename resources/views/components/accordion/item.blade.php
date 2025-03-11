@@ -22,8 +22,8 @@
             <div class="d-flex gap-4 align-items-center border-bottom border-secondary pb-2">
                 <h6 class="mb-0">Competitors</h6>
                 @can('isAdmin')
-                <x-buttons.outlinedBtn data-roundId="{{$round->id}}" class="px-2 py-0" variant="primary"
-                    data-bs-toggle="modal" data-bs-target="#addCompetitorsModal">Add</x-buttons.outlinedBtn>
+                <x-buttons.outlinedBtn class="px-2 py-0" variant="primary" data-bs-toggle="modal"
+                    data-bs-target="#addCompetitorsModal">Add</x-buttons.outlinedBtn>
                 @endcan
             </div>
             <div class="d-flex gap-3 flex-wrap">
