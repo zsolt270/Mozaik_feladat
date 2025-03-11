@@ -3,6 +3,7 @@ import * as bootstrap from "bootstrap";
 $(() => {
     const tournamentId = window.location.pathname.split("/")[1];
     let roundId;
+    let deboucedRequest;
 
     const createRoundModal = new bootstrap.Modal(
         document.getElementById("createRoundModal")
@@ -154,4 +155,25 @@ $(() => {
                 });
             }
         });
+    //search for user
+    $("#search").on("input", function (e) {
+        let query = $(this).val();
+
+        clearTimeout(deboucedRequest);
+
+        deboucedRequest = setTimeout(() => {
+            $.ajax({
+                url: `/${tournamentId}/${roundId}/search`,
+                data: { query },
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    $("#usersContainer").replaceWith(result.usersList);
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+            });
+        }, 1000);
+    });
 });

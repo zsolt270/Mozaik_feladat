@@ -92,4 +92,17 @@ class RoundController extends Controller
         $html = view('components.accordion.accordionLayout', ['tournament' => $tournament])->render();
         return response()->json(["html" => $html]);
     }
+
+    public function getSearchedUsers(Tournament $tournament, Round $round,)
+    {
+        $users = User::whereDoesntHave('rounds', function ($query) use ($round) {
+            $query->where('round_id', $round->id);
+        });
+
+        $searchedUsers = $users->where('uname', 'like', "%" . request('query') . "%");
+
+        $usersList = view('components.modals.usersList', ['users' => $searchedUsers->paginate(8)])->render();
+
+        return response()->json(["usersList" => $usersList]);
+    }
 }
