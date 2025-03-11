@@ -35,6 +35,10 @@ svg:hover {
     display: none !important;
 }
 
+.accordion-button:not(.collapsed) {
+    background-color: white;
+}
+
 .searched-user:hover {
     background-color: #e9ecef;
     cursor: pointer;
