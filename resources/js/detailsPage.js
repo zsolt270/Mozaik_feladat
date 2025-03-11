@@ -18,6 +18,7 @@ $(() => {
         },
     });
 
+    //effect for adding user to round
     $(".searched-user").on("click", function (e) {
         e.preventDefault();
         $(this).css("background-color", "#AFE1AF");
@@ -29,6 +30,7 @@ $(() => {
         }, 500);
     });
 
+    //create round
     $("#createRound").on("submit", function (e) {
         e.preventDefault();
 
@@ -61,6 +63,7 @@ $(() => {
             .attr("id");
     });
 
+    //update round
     $("#updateRound").on("submit", function (e) {
         e.preventDefault();
 
@@ -84,6 +87,7 @@ $(() => {
         });
     });
 
+    //delete round
     $("#accordionCointainer").on("click", function (e) {
         if (
             $(e.target).is("button.btn-outline-danger") &&
@@ -109,4 +113,6 @@ $(() => {
             });
         }
     });
+
+    // $()
 });

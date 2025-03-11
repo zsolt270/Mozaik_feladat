@@ -1,6 +1,6 @@
 @props(['userName', 'userId', 'roundId'])
 
-<div class="d-flex align-items-center gap-1 mt-2">
+<div class="col-12 col-sm-auto d-flex justify-content-between align-items-center mt-2">
     <p class="mb-0 fw-semibold">{{$userName}}</p>
     @can('isAdmin')
     <div>

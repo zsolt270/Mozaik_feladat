@@ -27,7 +27,7 @@
                     data-bs-target="#addCompetitorsModal">Add</x-buttons.outlinedBtn>
                 @endcan
             </div>
-            <div class="d-flex column-gap-5 row-gap-2 flex-wrap justify-content-between  justify-content-sm-start">
+            <div class="d-flex gap-3 flex-wrap">
                 @foreach ($round->competitors as $competitor)
                 <x-accordion.competitors :userName="$competitor->uname" :userId="$competitor->id"
                     :roundId="$round->id" />
