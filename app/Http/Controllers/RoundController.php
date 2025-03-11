@@ -63,13 +63,11 @@ class RoundController extends Controller
 
     public function getUsersList(Tournament $tournament, Round $round)
     {
-        $accordion = view('components.accordion.accordionLayout', ['tournament' => $tournament])->render();
-
         $usersList = view('components.modals.usersList', ['users' => User::whereDoesntHave('rounds', function ($query) use ($round) {
             $query->where('round_id', $round->id);
         })->paginate(8)])->render();
 
-        return response()->json(["accordion" => $accordion, "usersList" => $usersList]);
+        return response()->json(["usersList" => $usersList]);
     }
 
     public function storeCompetitor(Tournament $tournament, Round $round, User $user)

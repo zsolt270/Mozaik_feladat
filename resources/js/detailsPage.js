@@ -103,7 +103,8 @@ $(() => {
                 type: "get",
                 dataType: "json",
                 success: function (result) {
-                    $("#roundsAccordion").replaceWith(result.accordion);
+                    console.log(result);
+                    // $("#roundsAccordion").replaceWith(result.accordion);
                     $("#usersContainer").replaceWith(result.usersList);
                 },
                 error: function (error) {
@@ -132,29 +133,28 @@ $(() => {
     //effect for adding user to round and adding user to round
     $("#usersContainer")
         .parent()
-        .on("click", function (e) {
-            if ($(e.target).hasClass("searched-user")) {
-                e.preventDefault();
-                $(e.target).css("background-color", "#AFE1AF");
-                $(e.target).find("button").text("✓");
-                $(e.target).find("p").css("font-weight", "500");
+        .on("click", ".searched-user", function (e) {
+            e.preventDefault();
+            $(e.target).css("background-color", "#AFE1AF");
+            $(e.target).find("button").text("✓");
+            $(e.target).find("p").css("font-weight", "500");
 
-                $.ajax({
-                    url: `/${tournamentId}/${roundId}/${
-                        $(e.target).attr("id").split("-")[1]
-                    }`,
-                    type: "post",
-                    dataType: "json",
-                    success: function (result) {
-                        $("#roundsAccordion").replaceWith(result.accordion);
-                        $("#usersContainer").replaceWith(result.usersList);
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    },
-                });
-            }
+            $.ajax({
+                url: `/${tournamentId}/${roundId}/${
+                    $(e.target).attr("id").split("-")[1]
+                }`,
+                type: "post",
+                dataType: "json",
+                success: function (result) {
+                    $("#roundsAccordion").replaceWith(result.accordion);
+                    $("#usersContainer").replaceWith(result.usersList);
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+            });
         });
+
     //search for user
     $("#search").on("input", function (e) {
         let query = $(this).val();
@@ -176,4 +176,24 @@ $(() => {
             });
         }, 1000);
     });
+
+    // pagination
+
+    $("#usersContainer")
+        .parent()
+        .on("click", ".pagination a", function (e) {
+            e.preventDefault();
+            $.ajax({
+                url:
+                    `/${tournamentId}/${roundId}/competitors?page=` +
+                    $(this).attr("href").split("page=")[1],
+                method: "GET",
+                success: function (result) {
+                    $("#usersContainer").replaceWith(result.usersList);
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+            });
+        });
 });
