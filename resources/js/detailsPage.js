@@ -73,7 +73,7 @@ $(() => {
             .parents(".accordion-item")
             .children(".accordion-collapse")
             .attr("id");
-
+        //delete round
         if (
             $(e.target).is("button.btn-outline-danger") &&
             $(e.target).text() === "Delete"
@@ -83,7 +83,6 @@ $(() => {
                 type: "delete",
                 dataType: "json",
                 success: function (result) {
-                    console.log(result);
                     const newAccordion = result.html;
                     $("#roundsAccordion").replaceWith(newAccordion);
                     $("#updateRound")[0].reset();
@@ -95,9 +94,9 @@ $(() => {
                     $("#updateError-name").text(error.responseJSON.message);
                 },
             });
-        } else if (
-            $(e.target).is("button[data-bs-target='#addCompetitorsModal']")
-        ) {
+        }
+        //get userslist
+        if ($(e.target).is("button[data-bs-target='#addCompetitorsModal']")) {
             $.ajax({
                 url: `/${tournamentId}/${roundId}/competitors`,
                 type: "get",
@@ -105,6 +104,22 @@ $(() => {
                 success: function (result) {
                     $("#roundsAccordion").replaceWith(result.accordion);
                     $("#usersContainer").replaceWith(result.usersList);
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+            });
+        }
+        //delete competitor from round
+        if ($(e.target).is("button[data-uid]")) {
+            $.ajax({
+                url: `/${tournamentId}/${roundId}/${$(e.target).attr(
+                    "data-uid"
+                )}`,
+                type: "delete",
+                dataType: "json",
+                success: function (result) {
+                    $("#roundsAccordion").replaceWith(result.html);
                 },
                 error: function (error) {
                     console.log(error);
@@ -124,8 +139,9 @@ $(() => {
                 $(e.target).find("p").css("font-weight", "500");
 
                 $.ajax({
-                    url: `/${tournamentId}/${roundId}/create-competitor`,
-                    data: { userId: $(e.target).attr("id").split("-")[1] },
+                    url: `/${tournamentId}/${roundId}/${
+                        $(e.target).attr("id").split("-")[1]
+                    }`,
                     type: "post",
                     dataType: "json",
                     success: function (result) {

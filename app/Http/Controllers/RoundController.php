@@ -72,10 +72,8 @@ class RoundController extends Controller
         return response()->json(["accordion" => $accordion, "usersList" => $usersList]);
     }
 
-    public function storeCompetitor(Tournament $tournament, Round $round)
+    public function storeCompetitor(Tournament $tournament, Round $round, User $user)
     {
-        $user = User::findOrFail(request('userId'));
-
         $round->competitors()->attach($user->id);
 
         $accordion = view('components.accordion.accordionLayout', ['tournament' => $tournament])->render();
@@ -85,5 +83,13 @@ class RoundController extends Controller
         })->paginate(8)])->render();
 
         return response()->json(["accordion" => $accordion, "usersList" => $usersList]);
+    }
+
+    public function destroyCompetitor(Tournament $tournament, Round $round, User $user)
+    {
+        $round->competitors()->detach($user->id);
+
+        $html = view('components.accordion.accordionLayout', ['tournament' => $tournament])->render();
+        return response()->json(["html" => $html]);
     }
 }
