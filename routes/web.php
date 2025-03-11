@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\RoundController;
 use App\Http\Controllers\TournamentController;
-use App\Models\Round;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [TournamentController::class, 'index']);

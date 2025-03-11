@@ -130,6 +130,28 @@ $(() => {
         }
     });
 
+    //search for user
+    $("#search").on("input", function (e) {
+        let query = $(this).val();
+
+        clearTimeout(deboucedRequest);
+
+        deboucedRequest = setTimeout(() => {
+            $.ajax({
+                url: `/${tournamentId}/${roundId}/search`,
+                data: { query },
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    $("#usersContainer").replaceWith(result.usersList);
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+            });
+        }, 1000);
+    });
+
     //effect for adding user to round and adding user to round
     $("#usersContainer")
         .parent()
@@ -155,30 +177,7 @@ $(() => {
             });
         });
 
-    //search for user
-    $("#search").on("input", function (e) {
-        let query = $(this).val();
-
-        clearTimeout(deboucedRequest);
-
-        deboucedRequest = setTimeout(() => {
-            $.ajax({
-                url: `/${tournamentId}/${roundId}/search`,
-                data: { query },
-                type: "get",
-                dataType: "json",
-                success: function (result) {
-                    $("#usersContainer").replaceWith(result.usersList);
-                },
-                error: function (error) {
-                    console.log(error);
-                },
-            });
-        }, 1000);
-    });
-
     // pagination
-
     $("#usersContainer")
         .parent()
         .on("click", ".pagination a", function (e) {

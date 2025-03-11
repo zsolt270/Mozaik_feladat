@@ -6,7 +6,6 @@ use App\Models\Round;
 use App\Models\Tournament;
 use App\Models\User;
 use Exception;
-use Illuminate\Http\Request;
 
 class RoundController extends Controller
 {
@@ -31,7 +30,7 @@ class RoundController extends Controller
             return response()->json(['error' => $errors->getMessage()], 500);
         }
 
-        $html = view('components.accordion.accordionLayout', ['tournament' => $tournament])->render();
+        $html = $this->renderAccordion($tournament);
         return response()->json(["html" => $html]);
     }
 
@@ -49,7 +48,7 @@ class RoundController extends Controller
             return response()->json(['error' => $errors->getMessage()], 500);
         }
 
-        $html = view('components.accordion.accordionLayout', ['tournament' => $tournament])->render();
+        $html = $this->renderAccordion($tournament);
         return response()->json(["html" => $html]);
     }
 
@@ -57,15 +56,13 @@ class RoundController extends Controller
     {
         $round->delete();
 
-        $html = view('components.accordion.accordionLayout', ['tournament' => $tournament])->render();
+        $html = $this->renderAccordion($tournament);
         return response()->json(["html" => $html]);
     }
 
     public function getUsersList(Tournament $tournament, Round $round)
     {
-        $usersList = view('components.modals.usersList', ['users' => User::whereDoesntHave('rounds', function ($query) use ($round) {
-            $query->where('round_id', $round->id);
-        })->paginate(8)])->render();
+        $usersList = view('components.modals.usersList', ['users' => $this->getUsersListForRound($round)])->render();
 
         return response()->json(["usersList" => $usersList]);
     }
@@ -74,11 +71,9 @@ class RoundController extends Controller
     {
         $round->competitors()->attach($user->id);
 
-        $accordion = view('components.accordion.accordionLayout', ['tournament' => $tournament])->render();
+        $accordion = $this->renderAccordion($tournament);
 
-        $usersList = view('components.modals.usersList', ['users' => User::whereDoesntHave('rounds', function ($query) use ($round) {
-            $query->where('round_id', $round->id);
-        })->paginate(8)])->render();
+        $usersList = view('components.modals.usersList', ['users' => $this->getUsersListForRound($round)])->render();
 
         return response()->json(["accordion" => $accordion, "usersList" => $usersList]);
     }
@@ -87,7 +82,7 @@ class RoundController extends Controller
     {
         $round->competitors()->detach($user->id);
 
-        $html = view('components.accordion.accordionLayout', ['tournament' => $tournament])->render();
+        $html = $this->renderAccordion($tournament);
         return response()->json(["html" => $html]);
     }
 
@@ -102,5 +97,17 @@ class RoundController extends Controller
         $usersList = view('components.modals.usersList', ['users' => $searchedUsers->paginate(8)])->render();
 
         return response()->json(["usersList" => $usersList]);
+    }
+
+    private function renderAccordion(Tournament $tournament)
+    {
+        return view('components.accordion.accordionLayout', ['tournament' => $tournament])->render();
+    }
+
+    private function getUsersListForRound(Round $round)
+    {
+        return User::whereDoesntHave('rounds', function ($query) use ($round) {
+            $query->where('round_id', $round->id);
+        })->paginate(8);
     }
 }
