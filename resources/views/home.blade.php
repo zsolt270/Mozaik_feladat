@@ -2,11 +2,13 @@
     <x-slot:title>Tournaments</x-slot:title>
 
     {{-- main class="container mt-5" --}}
-
+    @can('isAdmin')
     <div class="text-center">
         <x-buttons.roundedBtn data-bs-toggle="modal" data-bs-target="#createTournamentModal">Create Tournament
         </x-buttons.roundedBtn>
     </div>
+    @endcan
+
     <div id="cardsContainer">
         <x-cards.list :tournaments="$tournaments" />
     </div>

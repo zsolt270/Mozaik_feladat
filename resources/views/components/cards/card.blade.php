@@ -18,6 +18,7 @@
             </li>
         </ul>
         <div class="d-flex justify-content-between mt-4">
+            @can('isAdmin')
             <div>
                 <x-buttons.outlinedBtn class="editTournamentBtn" variant="secondary" data-bs-toggle="modal"
                     data-bs-target="#editTournamentModal">
@@ -26,6 +27,7 @@
                 <x-buttons.outlinedBtn class="deleteTournamentBtn" variant="danger">
                     Delete</x-buttons.outlinedBtn>
             </div>
+            @endcan
             <div>
                 <a href="/{{$tournamentId}}/show" class="btn btn-outline-dark">
                     <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

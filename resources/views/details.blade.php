@@ -9,31 +9,27 @@
 
     <section class="mt-5 d-flex gap-4 align-items-center">
         <h3 class="mb-0">Rounds</h3>
+        @can('isAdmin')
         <div>
             <x-buttons.outlinedBtn class="px-2 py-1" variant="primary" data-bs-toggle="modal"
                 data-bs-target="#createRoundModal">Add Round</x-buttons.outlinedBtn>
         </div>
+        @endcan
     </section>
 
     {{-- accordion --}}
-    <section class="accordion mt-3" id="roundsAccordion">
-        @foreach ($tournament['rounds'] as $round)
-        <x-accordion.item :round="$round" :tournament="$tournament"></x-accordion.item>
-        @endforeach
-    </section>
+    <x-accordion.accordionLayout :tournament="$tournament" />
     {{-- accordion end--}}
 
     {{-- create round modal --}}
     <x-modals.modalLayout id="createRoundModal" modalHeader="Create Round">
-        <x-modals.roundModal action="" method="" labelText="Name" value="" btnText="Add">
-        </x-modals.roundModal>
+        <x-modals.roundModal id="createRound" labelText="Name" btnText="Add" />
     </x-modals.modalLayout>
     {{-- create round modal end --}}
 
     {{-- edit round modal --}}
     <x-modals.modalLayout id="editRoundModal" modalHeader="Edit Round">
-        <x-modals.roundModal action="" method="PATCH" labelText="New Name" value="Finals" btnText="Change">
-        </x-modals.roundModal>
+        <x-modals.roundModal id="updateRound" method="PATCH" labelText="New Name" btnText="Change" />
     </x-modals.modalLayout>
     {{-- edit round modal end--}}
 

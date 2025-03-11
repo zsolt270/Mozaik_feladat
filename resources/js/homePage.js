@@ -20,8 +20,6 @@ $(() => {
         $(".text-danger").text("");
 
         if (error.status === 422) {
-            $(".text-danger").text("");
-
             $.each(errorMsg, function (key, value) {
                 $("#" + formType + "Error-" + key).text(value);
             });
