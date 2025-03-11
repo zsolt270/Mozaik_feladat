@@ -2,7 +2,6 @@
 
 <form id="{{$id}}" class="row g-3" method="POST" action="#">
     @csrf
-    {{-- @if ($method === 'PATCH') @method('PATCH') @endif --}}
 
     <div class="col-md-12">
         <label for="name" class="form-label fw-bold">Name</label>

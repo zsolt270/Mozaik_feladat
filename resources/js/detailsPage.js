@@ -19,16 +19,30 @@ $(() => {
     });
 
     //effect for adding user to round
-    $(".searched-user").on("click", function (e) {
-        e.preventDefault();
-        $(this).css("background-color", "#AFE1AF");
-        $(this).find("button").text("✓");
-        $(this).find("p").css("font-weight", "500");
+    $("#usersContainer")
+        .parent()
+        .on("click", function (e) {
+            if ($(e.target).hasClass("searched-user")) {
+                e.preventDefault();
+                $(e.target).css("background-color", "#AFE1AF");
+                $(e.target).find("button").text("✓");
+                $(e.target).find("p").css("font-weight", "500");
 
-        setTimeout(() => {
-            $(this).addClass("display-none");
-        }, 500);
-    });
+                $.ajax({
+                    url: `/${tournamentId}/${roundId}/create-competitor`,
+                    data: { userId: $(e.target).attr("id").split("-")[1] },
+                    type: "post",
+                    dataType: "json",
+                    success: function (result) {
+                        $("#roundsAccordion").replaceWith(result.accordion);
+                        $("#usersContainer").replaceWith(result.usersList);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    },
+                });
+            }
+        });
 
     //create round
     $("#createRound").on("submit", function (e) {
@@ -93,7 +107,6 @@ $(() => {
             $(e.target).is("button.btn-outline-danger") &&
             $(e.target).text() === "Delete"
         ) {
-            console.log(roundId);
             $.ajax({
                 url: `/${tournamentId}/${roundId}`,
                 type: "delete",
@@ -113,6 +126,4 @@ $(() => {
             });
         }
     });
-
-    // $()
 });

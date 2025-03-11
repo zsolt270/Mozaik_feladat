@@ -12,7 +12,7 @@ class RoundController extends Controller
 {
     public function show(Tournament $tournament)
     {
-        $users = User::paginate(8);
+        $users = User::doesntHave('rounds')->paginate(8);
         return view('details', ['tournament' =>  $tournament, 'users' => $users]);
     }
 
@@ -59,5 +59,18 @@ class RoundController extends Controller
 
         $html = view('components.accordion.accordionLayout', ['tournament' => $tournament])->render();
         return response()->json(["html" => $html]);
+    }
+
+    public function storeCompetitor(Tournament $tournament, Round $round)
+    {
+        $user = User::findOrFail(request('userId'));
+
+        $round->competitors()->attach($user->id);
+
+        $accordion = view('components.accordion.accordionLayout', ['tournament' => $tournament])->render();
+
+        $usersList = view('components.modals.usersList', ['users' => User::doesntHave('rounds')->paginate(8)])->render();
+
+        return response()->json(["accordion" => $accordion, "usersList" => $usersList]);
     }
 }
