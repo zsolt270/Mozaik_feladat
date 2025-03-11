@@ -34,4 +34,8 @@ class RoundController extends Controller
         $html = view('components.accordion.accordionLayout', ['tournament' => $tournament])->render();
         return response()->json(["html" => $html]);
     }
+
+    public function update(Tournament $tournament) {}
+
+    public function destroy(Tournament $tournament) {}
 }
