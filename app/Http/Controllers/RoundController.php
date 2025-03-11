@@ -53,5 +53,11 @@ class RoundController extends Controller
         return response()->json(["html" => $html]);
     }
 
-    public function destroy(Tournament $tournament) {}
+    public function destroy(Tournament $tournament, Round $round)
+    {
+        $round->delete();
+
+        $html = view('components.accordion.accordionLayout', ['tournament' => $tournament])->render();
+        return response()->json(["html" => $html]);
+    }
 }

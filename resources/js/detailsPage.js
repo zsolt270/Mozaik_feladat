@@ -12,6 +12,12 @@ $(() => {
         document.getElementById("editRoundModal")
     );
 
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+
     $(".searched-user").on("click", function (e) {
         e.preventDefault();
         $(this).css("background-color", "#AFE1AF");
@@ -48,6 +54,7 @@ $(() => {
 
     //get the round id when user clicks on accordion
     $("#accordionCointainer").on("click", function (e) {
+        e.preventDefault();
         roundId = $(e.target)
             .parents(".accordion-item")
             .children(".accordion-collapse")
@@ -60,7 +67,7 @@ $(() => {
         $.ajax({
             url: `/${tournamentId}/${roundId}`,
             data: $("#updateRound").serialize(),
-            type: "post",
+            type: "patch",
             dataType: "json",
             success: function (result) {
                 const newAccordion = result.html;
@@ -77,5 +84,29 @@ $(() => {
         });
     });
 
-    $("#accordionContainer").on("click", function (e) {});
+    $("#accordionCointainer").on("click", function (e) {
+        if (
+            $(e.target).is("button.btn-outline-danger") &&
+            $(e.target).text() === "Delete"
+        ) {
+            console.log(roundId);
+            $.ajax({
+                url: `/${tournamentId}/${roundId}`,
+                type: "delete",
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);
+                    const newAccordion = result.html;
+                    $("#roundsAccordion").replaceWith(newAccordion);
+                    $("#updateRound")[0].reset();
+                    $("#updateError-name").text("");
+                    editRoundModal.hide();
+                },
+                error: function (error) {
+                    $("#updateError-name").text("");
+                    $("#updateError-name").text(error.responseJSON.message);
+                },
+            });
+        }
+    });
 });

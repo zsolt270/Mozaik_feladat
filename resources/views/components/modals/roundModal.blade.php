@@ -1,6 +1,6 @@
 @props(['id','method' => 'POST','labelText', 'btnText'])
 
-<form id="{{$id}}" class="row g-3" method="POST" action="#" novalidate>
+<form id="{{$id}}" class="row g-3" method="POST" action="#">
     @csrf
     @if ($method === 'PATCH') @method('PATCH') @endif
 
