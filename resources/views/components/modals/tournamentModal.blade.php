@@ -7,32 +7,32 @@
     <div class="col-md-12">
         <label for="name" class="form-label fw-bold">Name</label>
         <input type="text" class="form-control" id="{{$method === 'PATCH' ? 'Updatename' : 'Createname'}}" name="name"
-            placeholder="Chess Tournament" required>
+            placeholder="Chess Tournament" {{$method==='PATCH' ? "" : "required" }}>
         <span class="text-danger" id="{{$method === 'PATCH' ? 'updateError-name' : 'createError-name'}}"></span>
     </div>
     <div class="col-md-12">
         <label for="game" class="form-label fw-bold">Game</label>
         <input type="text" class="form-control" id="{{$method === 'PATCH' ? 'Updategame' : 'Creategame'}}" name="game"
-            placeholder="Chess" required>
+            placeholder="Chess" {{$method==='PATCH' ? "" : "required" }}>
         <span class="text-danger" id="{{$method === 'PATCH' ? 'updateError-game' : 'createError-game'}}"></span>
     </div>
     <div class="col-md-12">
         <label for="date" class="form-label fw-bold">Date</label>
         <input type="datetime-local" class="form-control" id="{{$method === 'PATCH' ? 'Updatedate' : 'Createdate'}}"
-            name="date" required>
+            name="date" {{$method==='PATCH' ? "" : "required" }}>
         <span class="text-danger" id="{{$method === 'PATCH' ? 'updateError-date' : 'createError-date'}}"></span>
     </div>
     <div class="col-6">
         <label for="country" class="form-label fw-bold">Country</label>
         <input list="countries" class="form-control" id="{{$method === 'PATCH' ? 'Updatecountry' : 'Createcountry'}}"
-            name="country" placeholder="Hungary" required>
+            name="country" placeholder="Hungary" {{$method==='PATCH' ? "" : "required" }}>
         <span class="text-danger" id="{{$method === 'PATCH' ? 'updateError-country' : 'createError-country'}}"></span>
         <x-form.datalist id="countries" />
     </div>
     <div class="col-6">
         <label for="address" class="form-label fw-bold">Address</label>
         <input type="text" class="form-control" id="{{$method === 'PATCH' ? 'Updateaddress' : 'Createaddress'}}"
-            name="address" placeholder="Szekszárd Mátyás király u. 12" required>
+            name="address" placeholder="Szekszárd Mátyás király u. 12" {{$method==='PATCH' ? "" : "required" }}>
         <span class="text-danger" id="{{$method === 'PATCH' ? 'updateError-address' : 'createError-address'}}"></span>
     </div>
     <div class="col-md-12">

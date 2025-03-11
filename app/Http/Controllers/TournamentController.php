@@ -26,7 +26,14 @@ class TournamentController extends Controller
 
     public function store()
     {
-        $this->validateTournament();
+        request()->validate([
+            'name' => ['required', 'string'],
+            'game' => ['required'],
+            'date' => ['required', 'date'],
+            'country' => ['required'],
+            'address' => ['required'],
+            'description' => ['required'],
+        ]);
 
         try {
             Tournament::create([
@@ -51,17 +58,26 @@ class TournamentController extends Controller
 
     public function update(Tournament $tournament)
     {
-        $this->validateTournament();
+        request()->validate([
+            'date' => ['date'],
+        ]);
+
+        $updateAttributes = [
+            'name' => request('name'),
+            'game' => request('game'),
+            'date' => request('date'),
+            'country' => request('country'),
+            'address' => request('address'),
+            'description' => request('description')
+        ];
+
+        if ($tournament->name === request('name') && $tournament->date === request('date')) {
+            $updateAttributes['name'] = '';
+            $updateAttributes['date'] = '';
+        }
 
         try {
-            $tournament->update([
-                'name' => request('name'),
-                'game' => request('game'),
-                'date' => request('date'),
-                'country' => request('country'),
-                'address' => request('address'),
-                'description' => request('description'),
-            ]);
+            $tournament->update($updateAttributes);
         } catch (Exception $errors) {
             return response()->json(['error' => 'This name at this date is unavailable'], 500);
         }
@@ -74,18 +90,6 @@ class TournamentController extends Controller
         $tournament->delete();
 
         return $this->returnUpdatedCardsList();
-    }
-
-    private function validateTournament()
-    {
-        request()->validate([
-            'name' => ['required', 'string'],
-            'game' => ['required'],
-            'date' => ['required', 'date'],
-            'country' => ['required'],
-            'address' => ['required'],
-            'description' => ['required'],
-        ]);
     }
 
     private function returnUpdatedCardsList()
