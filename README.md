@@ -45,7 +45,7 @@ Ez a repo tartalmazza a megoldásomat a PHP fejlesztő munkakör feladathoz.
     php artisan migrate --seed
     ```
 
-6.  **Futtatás és testek futtatása**
+6.  **Futtatás és tesztek futtatása**
 
     ```bash
     npm run dev
