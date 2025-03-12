@@ -7,7 +7,7 @@ Ez a repo tartalmazza a megoldásomat a PHP fejlesztő munkakör feladathoz.
 1.  **A projekt klónozása**
 
     ```bash
-    git clone https://github.com/<username>/<project-name>.git
+    git clone git@github.com:zsolt270/Mozaik_feladat.git
     ```
 
 2.  **Composer csomagok telepítése**
@@ -45,8 +45,14 @@ Ez a repo tartalmazza a megoldásomat a PHP fejlesztő munkakör feladathoz.
     php artisan migrate --seed
     ```
 
-6.  **Futtatás**
+6.  **Futtatás és testek futtatása**
 
     ```bash
     npm run dev
+    ```
+
+    A tesztek futtatásához:
+
+    ```bash
+    ./vendor/bin/pest
     ```
